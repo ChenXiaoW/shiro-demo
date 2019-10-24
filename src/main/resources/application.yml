@@ -1,0 +1,25 @@
+server:
+  port: 8998
+
+spring:
+  application:
+    name: shiro-demo
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/ShiroDev?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useAffectedRows=true&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis:
+  type-aliases-package: com.chenw.shirodev.model
+  mapper-locations: classpath:sqlclient/*.xml
+
+#日志
+logging:
+  level:
+    root: debug
+  file:
+    path: logs
+
+#需要放行的接口 - 无需认证
+filterInterface: /public/*

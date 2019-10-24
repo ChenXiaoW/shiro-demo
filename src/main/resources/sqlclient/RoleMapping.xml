@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chenw.shirodev.dao.RoleDao">
+
+    <insert id="addRole" parameterType="Role">
+        INSERT INTO t_role VALUES (#{roleId},#{roleName})
+    </insert>
+
+    <insert id="addUserRoleMapping" parameterType="UserRoleMapping">
+        INSERT INTO t_user_role values (DEFAULT ,#{userId},#{roleId})
+    </insert>
+
+    <insert id="addRolePermissionMapping" parameterType="RolePermissionMapping">
+        INSERT INTO t_role_permission VALUES (DEFAULT ,#{roleId},#{permissionId})
+    </insert>
+
+    <select id="queryRoleByUserId" parameterType="User" resultType="Role">
+        SELECT
+            r.roleId,
+            r.roleName
+        FROM
+            t_user_role ur,
+            t_role r
+        WHERE
+            ur.roleId = r.roleId
+            AND ur.userId = #{userId}
+    </select>
+</mapper>
